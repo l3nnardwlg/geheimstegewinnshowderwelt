@@ -28,21 +28,88 @@
     </section>
 
     <section id="lobby" class="panel hidden">
-      <p class="eyebrow">SESSION</p>
-      <div id="sessionCode" class="code">------</div>
+      <div class="hostHeader">
+        <div>
+          <p class="eyebrow">SESSION</p>
+          <div id="sessionCode" class="code">------</div>
+        </div>
+        <div id="lobbyMoney" class="moneyBadge"></div>
+      </div>
       <h2 id="lobbyTitle">Lobby</h2>
       <p id="lobbyHint" class="lead"></p>
+
+      <div id="hostSetup" class="hostDeck hidden">
+        <div class="sectionTitle"><div><p class="eyebrow">HOST CONTROL</p><h3>Spiel konfigurieren</h3></div></div>
+        <div class="settingsGrid">
+          <label>Fragenanzahl<input id="questionCountInput" type="number" min="1" max="100" value="20" /></label>
+          <label>Preisgeld / Spielgeld<input id="prizePoolInput" type="number" min="0" step="1000" value="100000" /></label>
+          <label>Zeit pro Frage (Sek.)<input id="questionDurationInput" type="number" min="5" max="300" value="30" /></label>
+          <button id="saveSettingsBtn" class="secondary settingsButton">Übernehmen</button>
+        </div>
+
+        <div class="deckGrid">
+          <div class="deckColumn">
+            <div class="sectionTitle"><div><p class="eyebrow">100 DEFAULTS</p><h3>Fragen-Pool</h3></div><input id="bankSearch" class="compactInput" placeholder="Frage suchen…" /></div>
+            <div id="questionBank" class="questionBank"></div>
+          </div>
+          <div class="deckColumn">
+            <div class="sectionTitle"><div><p class="eyebrow">LIVE QUEUE</p><h3 id="queueTitle">Fragen-Queue</h3></div><span class="muted">Drag & Drop</span></div>
+            <div id="questionQueue" class="questionQueue"></div>
+          </div>
+        </div>
+
+        <details class="customBox">
+          <summary>+ Custom-Frage hinzufügen</summary>
+          <label>Frage<input id="customQuestion" maxlength="300" placeholder="Deine Frage" /></label>
+          <div class="customAnswers">
+            <input id="customA" maxlength="160" placeholder="Antwort A" />
+            <input id="customB" maxlength="160" placeholder="Antwort B" />
+            <input id="customC" maxlength="160" placeholder="Antwort C" />
+            <input id="customD" maxlength="160" placeholder="Antwort D" />
+          </div>
+          <label>Richtige Antwort<select id="customCorrect"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></label>
+          <button id="addCustomBtn" class="secondary">In Queue hinzufügen</button>
+        </details>
+      </div>
+
+      <div class="sectionTitle"><div><p class="eyebrow">PLAYERS</p><h3>Teilnehmer</h3></div></div>
       <div id="players" class="players"></div>
       <button id="startBtn" class="primary hidden">Spiel starten</button>
     </section>
 
-    <section id="game" class="panel hidden">
+    <section id="game" class="panel gamePanel hidden">
       <div class="gameTop">
         <span id="questionCount" class="eyebrow"></span>
         <span id="score" class="score"></span>
       </div>
       <h2 id="questionText" class="question"></h2>
       <div id="answers" class="answers"></div>
+
+      <div id="hostLiveDeck" class="hostDeck hidden">
+        <div class="liveGrid">
+          <div>
+            <div class="sectionTitle"><div><p class="eyebrow">LIVE LEADERBOARD</p><h3>Rangliste & Antworten</h3></div></div>
+            <div id="liveLeaderboard" class="liveLeaderboard"></div>
+          </div>
+          <div>
+            <div class="sectionTitle"><div><p class="eyebrow">NEXT UP</p><h3>Queue</h3></div></div>
+            <div id="liveQueue" class="questionQueue compact"></div>
+          </div>
+        </div>
+        <details class="customBox">
+          <summary>+ Spontane Custom-Frage dazwischenwerfen</summary>
+          <label>Frage<input id="liveCustomQuestion" maxlength="300" placeholder="Deine Frage" /></label>
+          <div class="customAnswers">
+            <input id="liveCustomA" maxlength="160" placeholder="Antwort A" />
+            <input id="liveCustomB" maxlength="160" placeholder="Antwort B" />
+            <input id="liveCustomC" maxlength="160" placeholder="Antwort C" />
+            <input id="liveCustomD" maxlength="160" placeholder="Antwort D" />
+          </div>
+          <label>Richtige Antwort<select id="liveCustomCorrect"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></label>
+          <button id="addLiveCustomBtn" class="secondary">Als nächste Frage einfügen</button>
+        </details>
+      </div>
+
       <div id="hostStatus" class="hostStatus hidden"></div>
       <button id="nextBtn" class="primary hidden">Nächste Frage</button>
     </section>
